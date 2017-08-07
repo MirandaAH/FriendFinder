@@ -161,8 +161,8 @@
   <script type="text/javascript">
 
   $("#submit").on("click", function(event) {
-       // Create an object for the user"s data
-       var userInfo = {
+       // Create an object for the newFriend data
+       var newFriend = {
          name: $("#name").val(),
          photo: $("#profilePhoto").val(),
          scores: [
@@ -178,18 +178,20 @@
            $("#q10").val()
          ]
        };
-       // Grab the URL of the website
+       // URL of the website
        var currentURL = window.location.origin;
-       // AJAX post the data to the friends API.
-       $.post(currentURL + "/api/friends", userInfo, function(data) {
-         // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+
+       //AJAX call
+       $.post(currentURL + "/api/friends", newFriend, function(data) {
+
+         // print bestMatch info onto modal
          $("#matchName").text(data.name);
          $("#matchPhoto").attr("src", data.photo);
-         // Show the modal with the best match
+         // Show modal
          $("#matchModal").modal("toggle");
        });
 
-       friends.push(userInfo);
+       friends.push(newFriend);
 
      return false;
    });
